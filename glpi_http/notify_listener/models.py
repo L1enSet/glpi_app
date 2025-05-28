@@ -1,3 +1,16 @@
 from django.db import models
 
-# Create your models here.
+class Employees(models.Model):
+    glpi_token = models.CharField(max_length=256)
+    glpi_name = models.CharField(max_length=128)
+    tg_id = models.CharField(max_length=128)
+    tg_name = models.CharField(max_length=256)
+    surname = models.CharField(max_length=128)
+    name = models.CharField(max_length=128)
+    patronymic = models.CharField(max_length=128)
+    
+    def __str__(self):
+        return f"{self.glpi_name} - {self.tg_name}"
+    
+    def fullName(self):
+        return "{} {} {}".format(self.surname, self.name, self.patronymic)

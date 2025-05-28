@@ -9,4 +9,13 @@ def get_data():
 
     print(response.text)
 
-get_data()
+def strParse():
+    string = """Update Ticket
+ID: 0443676
+Title: Проблемы с ПК
+Заявка: Описание:  <div>\n<h1>Данные формы</h1>\n<h2>Информационный блок</h2>\n<div><strong>1) Описание обращения : </strong>\n<p>Тест. Не удалять. телеграм//////</p>\n</div>\n</div>  
+Назначено специалистам: % Злыгостев Всеволод Львович  %"""
+    ticket = string.split('%')
+    print(ticket[-2])
+
+strParse()
