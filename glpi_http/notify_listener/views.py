@@ -23,14 +23,14 @@ def send_notify(request):
             for user in pattern.to_users():
                 django_tb.send_message(user, pattern.message())
         else:
-            resp['status_code'] = 404
+            resp['status'] = 400
             resp['error'] = 'User not found'
             return JsonResponse(resp)
         
-        resp['status_code'] = 200
+        resp['status'] = 200
         return JsonResponse(resp)
     else:
-        resp['status_code'] = 400
+        resp['status'] = 400
         return JsonResponse(resp)
 
 
