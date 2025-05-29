@@ -28,6 +28,25 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['10.120.254.17']
 
+LOGGING = {  
+    'version': 1,  
+    'disable_existing_loggers': False,  
+    'handlers': {  
+        'file': {  
+            'level': 'DEBUG',  
+            'class': 'logging.FileHandler',  
+            'filename': os.path.join(BASE_DIR, '/debug.log'),  
+        },  
+    },  
+    'loggers': {  
+        'django': {  
+            'handlers': ['file'],  
+            'level': 'DEBUG',  
+            'propagate': True,  
+        },  
+    },  
+}
+
 
 # Application definition
 
@@ -122,6 +141,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, '/static/')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

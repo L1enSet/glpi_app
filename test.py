@@ -2,7 +2,7 @@ import requests
 import json
 
 def get_data():
-    url = "http://127.0.0.1:8000/send_notify/"
+    url = "http://10.120.254.17/send_notify/"
     headers = {'ContentType': 'json'}
     data = {
         'notify_type': 'update_ticket',
