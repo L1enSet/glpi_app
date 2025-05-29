@@ -24,3 +24,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('send_notify/', send_notify, name='send_notify')
 ]
+#http://10.120.254.17/send_notify/
