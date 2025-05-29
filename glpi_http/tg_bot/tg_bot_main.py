@@ -1,6 +1,8 @@
 #import logging
 import time
+import asyncio
 import telebot
+from telebot.async_telebot import AsyncTeleBot
 #from telebot import types
 
 
@@ -19,11 +21,13 @@ import telebot
 
 
 TOKEN = '5724389208:AAHaWn0yrph6lGE19yZMLedvxFhEg8-lGG4'
-tb = telebot.TeleBot(TOKEN)
+#tb = telebot.TeleBot(TOKEN)
+tb = AsyncTeleBot(TOKEN)
+django_tb = telebot.TeleBot(TOKEN)
 
 
 @tb.message_handler(commands=['get_message', 'go', 'get_image', 'get_cat'])
-def start_func(message):
+async def start_func(message):
     try:
         functions = {
             '/get_message':get_message
@@ -32,12 +36,12 @@ def start_func(message):
         user = "{}-{}".format(message.chat.id, message.chat.username)
         #logging.info("user {} input command {}".format(user, message.text))
 
-        return functions[message.text](message)
+        return await functions[message.text](message)
 
     except KeyError as exc:
         #logging.info("KeyError No command {}".format(message.text))
         
-        tb.send_message(message.chat.id, "Нет такой команды.")
+        await tb.send_message(message.chat.id, "Нет такой команды.")
 
 
 
@@ -55,9 +59,9 @@ def start_func(message):
 
 
     
-def get_message(message):
+async def get_message(message):
     user = "{}-{}".format(message.chat.id, message.chat.username)
-    tb.send_message(message.chat.id, user)
+    await tb.send_message(message.chat.id, user)
 
     
     #logging.info("user {} use func get_message".format(user))
@@ -72,7 +76,7 @@ def main():
     while True:
         try:
             #logging.info("BoT starting!")
-            tb.infinity_polling()
+            asyncio.run(tb.infinity_polling())
 
         except ConnectionResetError as conn_err:
             #logging.info("Bot stop polling exc - ConnectionResetError")

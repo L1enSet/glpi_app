@@ -2,6 +2,8 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+from threading import Thread
+from tg_bot import tg_bot_main
 
 
 def main():
@@ -15,6 +17,7 @@ def main():
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         ) from exc
+    print(sys.argv)
     execute_from_command_line(sys.argv)
 
 

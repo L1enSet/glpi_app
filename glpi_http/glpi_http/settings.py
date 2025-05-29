@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'notify_listener',
-    'users'
+    'users',
+    'tg_bot'
 ]
 
 MIDDLEWARE = [
