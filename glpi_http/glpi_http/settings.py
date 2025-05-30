@@ -27,6 +27,7 @@ SECRET_KEY = 'django-insecure-14j8v)fqmxebifi_5b7e&_bnpz0k*q!13l+kh5mffjlj*@$230
 DEBUG = False
 
 ALLOWED_HOSTS = ['172.17.1.26']
+#ALLOWED_HOSTS = []
 
 """LOGGING = {  
     'version': 1,  
