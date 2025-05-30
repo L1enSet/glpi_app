@@ -8,7 +8,8 @@ from .models import Employees
 #from rest_framework.response import Response
 
 
-from tg_bot.tg_bot_main import TOKEN, django_tb
+#from tg_bot.tg_bot_main import TOKEN, django_tb
+from glpi_http.settings import django_tb
 from .message_patterns import choise_pattern
 
 @api_view(['POST'])
