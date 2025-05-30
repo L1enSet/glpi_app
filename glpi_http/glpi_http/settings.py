@@ -122,10 +122,10 @@ WSGI_APPLICATION = 'glpi_http.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'glpi_app_db',
-        'USER': 'glpi',
-        'PASSWORD': 'P@ssw0rd',
-        'HOST': 'localhost',
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST'),
         'PORT': 5432,
     }
 }
