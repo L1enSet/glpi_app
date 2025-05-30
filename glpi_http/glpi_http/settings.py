@@ -26,6 +26,8 @@ env = environ.Env(
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 BOT_TOKEN = env('BOT_TOKEN')
+AL_HST = env('ALLOWED_HOSTS')
+
 
 django_tb = telebot.TeleBot(BOT_TOKEN)
 
@@ -33,12 +35,12 @@ django_tb = telebot.TeleBot(BOT_TOKEN)
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-14j8v)fqmxebifi_5b7e&_bnpz0k*q!13l+kh5mffjlj*@$230'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['172.17.1.26']
+ALLOWED_HOSTS = [AL_HST]
 #ALLOWED_HOSTS = []
 
 """LOGGING = {  
