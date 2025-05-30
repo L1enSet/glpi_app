@@ -13,24 +13,27 @@ from .message_patterns import choise_pattern
 
 @api_view(['POST'])
 def send_notify(request):
-    resp = {}
-    if request.method == 'POST':
-        django_tb.send_message('631273289', request.body)
-        data = request.body.decode().split("****")
-        pattern = choise_pattern(data)
-        if pattern != None:
-            for user in pattern.to_users():
-                django_tb.send_message(user, pattern.message())
+    try:
+        resp = {}
+        if request.method == 'POST':
+            django_tb.send_message('631273289', request.body)
+            data = request.body.decode().split("****")
+            pattern = choise_pattern(data)
+            if pattern != None:
+                for user in pattern.to_users():
+                    django_tb.send_message(user, pattern.message())
+            else:
+                resp['status'] = 400
+                resp['error'] = 'User not found'
+                return JsonResponse(resp)
+            
+            resp['status'] = 200
+            return JsonResponse(resp)
         else:
             resp['status'] = 400
-            resp['error'] = 'User not found'
             return JsonResponse(resp)
-        
-        resp['status'] = 200
-        return JsonResponse(resp)
-    else:
-        resp['status'] = 400
-        return JsonResponse(resp)
+    except Exception as exc:
+        django_tb.send_message('631273289', str(exc))
 
 
     

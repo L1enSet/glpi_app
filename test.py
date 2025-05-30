@@ -81,9 +81,16 @@ class UpdateTicketPattern():
         return users_list
 
 
-data2 = """update_ticket****0443676**** Яковлев Антон Сергеевич  **** Яковлев Антон Сергеевич  **** Проблемы с ПК  **** <div>\n<h1>Данные формы</h1>\n<h2>Информационный блок</h2>\n<div><strong>1) Описание обращения : </strong>\n<p>Тест. Не удалять. телеграм//////dfg</p>\n</div>\n</div>  ****"""
-data = data2.split("****")
-cl = UpdateTicketPattern(data=data)
+#data2 = """update_ticket****0443676**** Яковлев Антон Сергеевич  **** Яковлев Антон Сергеевич  **** Проблемы с ПК  **** <div>\n<h1>Данные формы</h1>\n<h2>Информационный блок</h2>\n<div><strong>1) Описание обращения : </strong>\n<p>Тест. Не удалять. телеграм//////dfg</p>\n</div>\n</div>  ****"""
+#data = data2.split("****")
+#cl = UpdateTicketPattern(data=data)
 #print(cl.initiator.strip().split(" "))
 #print(cl.assign_user.strip().split(" "))
-get_data()
+
+
+kt = {'key':"123",}
+try:
+    print(kt["100"])
+except Exception as exc:
+    print(exc.__str__)
+    print('hello')
