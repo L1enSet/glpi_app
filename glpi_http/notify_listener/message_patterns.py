@@ -1,5 +1,6 @@
 from .utils import get_user_queryset
 from bs4 import BeautifulSoup
+from tg_bot.tg_bot_main import TOKEN, django_tb
     
 
 class UpdateTicketPattern():
@@ -13,12 +14,16 @@ class UpdateTicketPattern():
         self.description = data[5]
     
     def parseDescription(self):
-        soup = BeautifulSoup(self.description, 'lxml')
-        result = ""
-        for line in soup.find_all('p'):
-            result += line.text
-            result += "\n"
-        return result
+        try:
+            soup = BeautifulSoup(self.description, 'lxml')
+            result = ""
+            for line in soup.find_all('p'):
+                result += line.text
+                result += "\n"
+            return result
+        except Exception as exc:
+            django_tb.send_message('631273289', str(exc))
+            
     
     def message(self):
         message = f"Заявка - {self.ticket_id} была обновленна.\nТема - {self.title}\nОписание - {self.parseDescription()}\nИнициатор - {self.initiator.fullName()}\nНазначено специалистам - {self.assign_user.fullName()}"
