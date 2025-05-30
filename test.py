@@ -2,7 +2,7 @@ import requests
 import json
 
 def get_data():
-    url = "http://10.120.254.17/send_notify/"
+    url = "http://172.17.1.26/send_notify/"
     headers = {'ContentType': 'json'}
     data = {
         'notify_type': 'update_ticket',
@@ -12,9 +12,11 @@ def get_data():
         'title': 'проблемы с ПК',
         'description': 'Активировать офис'
         }
+
+    data2 = """0443676**** Яковлев Антон Сергеевич  **** Яковлев Антон Сергеевич  **** Проблемы с ПК  **** <div>\n<h1>Данные формы</h1>\n<h2>Информационный блок</h2>\n<div><strong>1) Описание обращения : </strong>\n<p>Тест. Не удалять. телеграм//////dfg</p>\n</div>\n</div>  ****"""
     
     
-    response=requests.post(url=url, headers=headers, data=json.dumps(data))
+    response=requests.post(url=url, headers=headers, data=data2)
     print(response.status_code)
 
     print(response.text)

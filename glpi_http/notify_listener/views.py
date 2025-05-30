@@ -17,7 +17,7 @@ def send_notify(request):
     if request.method == 'POST':
         print(request.body)
         django_tb.send_message('631273289', request.body)
-        data = json.loads(request.body)
+        data = request.body.split("****")
         pattern = choise_pattern(data)
         print(pattern.to_users())
         if pattern != None:
