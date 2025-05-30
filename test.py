@@ -17,7 +17,7 @@ def get_data():
     data2 = """update_ticket****0443676**** Яковлев Антон Сергеевич  **** Яковлев Антон Сергеевич  **** Проблемы с ПК  **** <div>\n<h1>Данные формы</h1>\n<h2>Информационный блок</h2>\n<div><strong>1) Описание обращения : </strong>\n<p>Тест. Не удалять. телеграм//////dfg</p>\n</div>\n</div>"""
     data3 = """update_ticket****0443914**** Васильева Екатерина Андреевна  ****  -- **** В связи со сменой фамилии на Старкову, прошу внести изменения в раб.базы, в т.ч._ эл.почта_1с_портал и т.п.  **** <p class=\"MsoNormal\">В связи со сменой фамилии на Старкову, прошу внести соответствующие изменения в раб.базы, в т.ч. эл.почта, 1с, портал и т.п.</p>\n<p class=\"MsoNormal\"> </p>\n<p class=\"MsoNormal\"><span style=\"mso-fareast-language: RU;\">С уважением,</span></p>\n<p class=\"MsoNormal\"><span style=\"mso-fareast-language: RU;\">Старкова Екатерина</span></p>\n<p class=\"MsoNormal\"><span style=\"mso-fareast-language: RU;\">Тел. (342) 238-52-06 доб.1737</span></p>"""
     
-    response=requests.post(url=url2, headers=headers, data=data3)
+    response=requests.post(url=url, headers=headers, data=data3)
     print(response.status_code)
 
     print(response.text)
