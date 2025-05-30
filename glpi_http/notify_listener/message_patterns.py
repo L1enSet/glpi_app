@@ -12,8 +12,8 @@ class UpdateTicketPattern():
         self.assign_user = data[3]
         self.title = data[4]
         self.description = data[5]
-        self.initiator_obj = get_user_queryset(self.initiator)
-        self.assign_user_obj = get_user_queryset(self.assign_user)
+        self.initiator_obj = get_user_queryset(data[2])
+        self.assign_user_obj = get_user_queryset(data[3])
     
     def parseDescription(self):
         try:
@@ -30,7 +30,7 @@ class UpdateTicketPattern():
     def message(self):
         
         if self.initiator_obj != None:
-            self.initiator = initiator_obj.fullName()
+            self.initiator = self.initiator_obj.fullName()
         if self.assign_user_obj != None:
             self.assign_user = self.assign_user_obj.fullName()
             
@@ -40,7 +40,7 @@ class UpdateTicketPattern():
     def to_users(self):
         users_list = []
         if self.assign_user_obj != None:
-            users_list.append(self.assign_user.tg_id)
+            users_list.append(self.assign_user_obj.tg_id)
         return users_list
 
 
