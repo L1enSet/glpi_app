@@ -9,7 +9,8 @@ from .models import Employees
 
 
 #from tg_bot.tg_bot_main import TOKEN, django_tb
-from glpi_http.settings import django_tb
+#from glpi_http.settings import django_tb
+from django.conf import settings
 from .message_patterns import choise_pattern
 
 @api_view(['POST'])
@@ -17,7 +18,7 @@ def send_notify(request):
     try:
         resp = {}
         if request.method == 'POST':
-            django_tb.send_message('631273289', request.body)
+            settings.django_tb.send_message('631273289', request.body)
             data = request.body.decode().split("****")
             pattern = choise_pattern(data)
             if pattern != None:
