@@ -1,4 +1,5 @@
 from .utils import get_user_queryset
+from bs4 import BeautifulSoup
     
 
 class UpdateTicketPattern():
@@ -11,8 +12,16 @@ class UpdateTicketPattern():
         self.title = data[4]
         self.description = data[5]
     
+    def parseDescription(self):
+        soup = BeautifulSoup(self.description, 'lxml')
+        result = ""
+        for line in soup.find_all('p'):
+            result += line.text
+            result += "\n"
+        return result
+    
     def message(self):
-        message = f"Заявка - {self.ticket_id} была обновленна.\nТема - {self.title}\nОписание - {self.description}\nИнициатор - {self.initiator.fullName()}\nНазначено специалистам - {self.assign_user.fullName()}"
+        message = f"Заявка - {self.ticket_id} была обновленна.\nТема - {self.title}\nОписание - {self.parseDescription()}\nИнициатор - {self.initiator.fullName()}\nНазначено специалистам - {self.assign_user.fullName()}"
         return message
     
     def to_users(self):
