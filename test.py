@@ -3,7 +3,8 @@ import json
 
 def get_data():
     url = "http://172.17.1.26/send_notify/"
-    headers = {'ContentType': 'json'}
+    url2 = "http://127.0.0.1:8000/send_notify/"
+    headers = {'ContentType': 'text/plain'}
     data = {
         'notify_type': 'update_ticket',
         'ticket_id': '441959',
@@ -13,10 +14,10 @@ def get_data():
         'description': 'Активировать офис'
         }
 
-    data2 = """update_ticket****0443676**** Яковлев Антон Сергеевич  **** Яковлев Антон Сергеевич  **** Проблемы с ПК  **** <div>\n<h1>Данные формы</h1>\n<h2>Информационный блок</h2>\n<div><strong>1) Описание обращения : </strong>\n<p>Тест. Не удалять. телеграм//////dfg</p>\n</div>\n</div>  ****"""
+    data2 = """update_ticket****0443676**** Яковлев Антон Сергеевич  **** Яковлев Антон Сергеевич  **** Проблемы с ПК  **** <div>\n<h1>Данные формы</h1>\n<h2>Информационный блок</h2>\n<div><strong>1) Описание обращения : </strong>\n<p>Тест. Не удалять. телеграм//////dfg</p>\n</div>\n</div>"""
     
     
-    response=requests.post(url=url, headers=headers, data=data2)
+    response=requests.post(url=url2, headers=headers, data=data2)
     print(response.status_code)
 
     print(response.text)
@@ -50,7 +51,7 @@ data = {
         'description': 'Активировать офис'
         }
 
-class UpdateTicketPattern():
+class UpdateTicketPattern1():
     
     def __init__(self, *args, **kwargs):
         self.notify_type = data['notify_type']
@@ -60,4 +61,29 @@ class UpdateTicketPattern():
         self.title = data['title']
         self.description = data['description']
 
+
+class UpdateTicketPattern():
+    
+    def __init__(self, data):
+        self.notify_type = data[0]
+        self.ticket_id = data[1]
+        self.initiator = data[2]
+        self.assign_user = data[3]
+        self.title = data[4]
+        self.description = data[5]
+    
+    def message(self):
+        message = f"Заявка - {self.ticket_id} была обновленна.\nТема - {self.title}\nОписание - {self.description}\nИнициатор - {self.initiator}\nНазначено специалистам - {self.assign_user}"
+        return message
+    
+    def to_users(self):
+        users_list = [self.assign_user.tg_id,]
+        return users_list
+
+
+data2 = """update_ticket****0443676**** Яковлев Антон Сергеевич  **** Яковлев Антон Сергеевич  **** Проблемы с ПК  **** <div>\n<h1>Данные формы</h1>\n<h2>Информационный блок</h2>\n<div><strong>1) Описание обращения : </strong>\n<p>Тест. Не удалять. телеграм//////dfg</p>\n</div>\n</div>  ****"""
+data = data2.split("****")
+cl = UpdateTicketPattern(data=data)
+#print(cl.initiator.strip().split(" "))
+#print(cl.assign_user.strip().split(" "))
 get_data()

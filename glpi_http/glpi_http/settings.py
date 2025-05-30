@@ -28,7 +28,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['172.17.1.26']
 
-LOGGING = {  
+"""LOGGING = {  
     'version': 1,  
     'disable_existing_loggers': False,  
     'handlers': {  
@@ -45,7 +45,7 @@ LOGGING = {
             'propagate': True,  
         },  
     },  
-}
+}"""
 
 
 # Application definition

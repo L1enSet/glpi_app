@@ -15,11 +15,9 @@ from .message_patterns import choise_pattern
 def send_notify(request):
     resp = {}
     if request.method == 'POST':
-        print(request.body)
         django_tb.send_message('631273289', request.body)
-        data = request.body.split("****")
+        data = request.body.decode().split("****")
         pattern = choise_pattern(data)
-        print(pattern.to_users())
         if pattern != None:
             for user in pattern.to_users():
                 django_tb.send_message(user, pattern.message())
