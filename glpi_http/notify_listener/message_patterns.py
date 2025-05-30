@@ -8,10 +8,12 @@ class UpdateTicketPattern():
     def __init__(self, data):
         self.notify_type = data[0]
         self.ticket_id = data[1]
-        self.initiator = get_user_queryset(data[2])
-        self.assign_user = get_user_queryset(data[3])
+        self.initiator = data[2]
+        self.assign_user = data[3]
         self.title = data[4]
         self.description = data[5]
+        self.initiator_obj = get_user_queryset(self.initiator)
+        self.assign_user_obj = get_user_queryset(self.assign_user)
     
     def parseDescription(self):
         try:
@@ -26,11 +28,19 @@ class UpdateTicketPattern():
             
     
     def message(self):
-        message = f"Заявка - {self.ticket_id} была обновленна.\nТема - {self.title}\nОписание - {self.parseDescription()}\nИнициатор - {self.initiator.fullName()}\nНазначено специалистам - {self.assign_user.fullName()}"
+        
+        if self.initiator_obj != None:
+            self.initiator = initiator_obj.fullName()
+        if self.assign_user_obj != None:
+            self.assign_user = self.assign_user_obj.fullName()
+            
+        message = f"Заявка - {self.ticket_id} была обновленна.\nТема - {self.title}\nОписание - {self.parseDescription()}\nИнициатор - {self.initiator}\nНазначено специалистам - {self.assign_user}"
         return message
     
     def to_users(self):
-        users_list = [self.assign_user.tg_id,]
+        users_list = []
+        if self.assign_user_obj != None:
+            users_list.append(self.assign_user.tg_id)
         return users_list
 
 
