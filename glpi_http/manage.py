@@ -2,8 +2,7 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-from threading import Thread
-from tg_bot import tg_bot_main
+
 
 
 def main():

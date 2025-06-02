@@ -1,6 +1,6 @@
 from .utils import get_user_queryset
 from bs4 import BeautifulSoup
-from tg_bot.tg_bot_main import TOKEN, django_tb
+from glpi_http.settings import django_tb
     
 
 class UpdateTicketPattern():

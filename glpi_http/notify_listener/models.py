@@ -1,13 +1,14 @@
 from django.db import models
 
 class Employees(models.Model):
-    glpi_token = models.CharField(max_length=256)
+    glpi_token = models.CharField(max_length=256, null=True, blank=True)
     glpi_name = models.CharField(max_length=128)
     tg_id = models.CharField(max_length=128)
     tg_name = models.CharField(max_length=256)
     surname = models.CharField(max_length=128)
     name = models.CharField(max_length=128)
     patronymic = models.CharField(max_length=128)
+    is_active = models.BooleanField(default=True)
     
     def __str__(self):
         return f"{self.glpi_name} - {self.tg_name}"

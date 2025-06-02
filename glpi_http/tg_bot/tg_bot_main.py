@@ -1,9 +1,24 @@
 #import logging
 import time
 import asyncio
-import telebot
 from telebot.async_telebot import AsyncTeleBot
-#from telebot import types
+from telebot import types
+
+import os
+import environ
+
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = "../"
+
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
+BOT_TOKEN = env('BOT_TOKEN')
+print(BOT_TOKEN)
 
 
 
@@ -20,17 +35,15 @@ from telebot.async_telebot import AsyncTeleBot
 #logging.basicConfig(level=logging.INFO, filename="bot_log.log", filemode="a", format="%(asctime)s %(levelname)s %(message)s")
 
 
-TOKEN = '5724389208:AAHaWn0yrph6lGE19yZMLedvxFhEg8-lGG4'
 #tb = telebot.TeleBot(TOKEN)
-tb = AsyncTeleBot(TOKEN)
-django_tb = telebot.TeleBot(TOKEN)
+tb = AsyncTeleBot(BOT_TOKEN)
 
 
-@tb.message_handler(commands=['get_message', 'go', 'get_image', 'get_cat'])
+@tb.message_handler(commands=['get_message', 'start', 'get_image', 'get_cat'])
 async def start_func(message):
     try:
         functions = {
-            '/get_message':get_message
+            '/start':get_message
             }
 
         user = "{}-{}".format(message.chat.id, message.chat.username)
@@ -42,7 +55,7 @@ async def start_func(message):
         #logging.info("KeyError No command {}".format(message.text))
         
         await tb.send_message(message.chat.id, "Нет такой команды.")
-
+ 
 
 
 
