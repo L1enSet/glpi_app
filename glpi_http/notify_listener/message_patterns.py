@@ -28,19 +28,15 @@ class UpdateTicketPattern():
             
     
     def message(self):
-        
-        if self.initiator_obj != None:
-            self.initiator = self.initiator_obj.fullName()
-        if self.assign_user_obj != None:
-            self.assign_user = self.assign_user_obj.fullName()
             
         message = f"Заявка - {self.ticket_id} была обновленна.\nТема - {self.title}\nОписание - {self.parseDescription()}\nИнициатор - {self.initiator}\nНазначено специалистам - {self.assign_user}"
         return message
     
     def to_users(self):
         users_list = []
-        if self.assign_user_obj != None:
-            users_list.append(self.assign_user_obj.tg_id)
+        if len(self.assign_user_obj) != 0:
+            for user in self.assign_user_obj:
+                users_list.append(user.tg_id)
         return users_list
 
 

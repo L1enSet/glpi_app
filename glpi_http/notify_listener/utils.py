@@ -1,7 +1,7 @@
 from .models import Employees
 
 
-def get_user_queryset(user_name):
+"""def get_user_queryset(user_name):
     queryset = None
     try:
         user_data = user_name.strip().split(" ")
@@ -15,4 +15,31 @@ def get_user_queryset(user_name):
     except IndexError:
         queryset = None
     
-    return queryset
+    return queryset"""
+
+
+def get_user_queryset(user_name):
+    queryset_array = []
+
+    users = []
+    user_data = user_name.split(",")
+    for user in user_data: 
+        usr = {'surname': None,
+            'name': None,
+            'patronymic': None}
+        index = 0
+        for i in usr.keys():
+            usr[i] = user.strip().split(" ")[index]
+            index +=1
+        users.append(usr)
+    
+    for user in users:    
+        try:
+            queryset = Employees.objects.get(surname=user['surname'], name=user['name'], patronymic=user['patronymic'])
+            queryset_array.append(queryset)
+        except Employees.DoesNotExist as exc:
+            continue
+    
+    print(queryset_array)
+    
+    return queryset_array

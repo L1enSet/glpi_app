@@ -16,8 +16,9 @@ def get_data():
 
     data2 = """update_ticket****0443676**** Яковлев Антон Сергеевич  **** Яковлев Антон Сергеевич  **** Проблемы с ПК  **** <div>\n<h1>Данные формы</h1>\n<h2>Информационный блок</h2>\n<div><strong>1) Описание обращения : </strong>\n<p>Тест. Не удалять. телеграм//////dfg</p>\n</div>\n</div>"""
     data3 = """update_ticket****0443914**** Васильева Екатерина Андреевна  ****  -- **** В связи со сменой фамилии на Старкову, прошу внести изменения в раб.базы, в т.ч._ эл.почта_1с_портал и т.п.  **** <p class=\"MsoNormal\">В связи со сменой фамилии на Старкову, прошу внести соответствующие изменения в раб.базы, в т.ч. эл.почта, 1с, портал и т.п.</p>\n<p class=\"MsoNormal\"> </p>\n<p class=\"MsoNormal\"><span style=\"mso-fareast-language: RU;\">С уважением,</span></p>\n<p class=\"MsoNormal\"><span style=\"mso-fareast-language: RU;\">Старкова Екатерина</span></p>\n<p class=\"MsoNormal\"><span style=\"mso-fareast-language: RU;\">Тел. (342) 238-52-06 доб.1737</span></p>"""
+    data4 = """update_ticket****0443676**** Яковлев Антон Сергеевич  **** Самойлов Данил Андреевич, Яковлев Антон Сергеевич  **** Проблемы с ПК  **** <div>\n<h1>Данные формы</h1>\n<h2>Информационный блок</h2>\n<div><strong>1) Описание обращения : </strong>\n<p>Тест. Не удалять. телеграм//////dfg1232asd213</p>\n</div>\n</div>"""
     
-    response=requests.post(url=url, headers=headers, data=data3)
+    response=requests.post(url=url2, headers=headers, data=data4)
     print(response.status_code)
 
     print(response.text)
@@ -88,4 +89,25 @@ class UpdateTicketPattern():
 #print(cl.assign_user.strip().split(" "))
 
 
+def get_user_queryset(user_name):
+    queryset = None
+    users = []
+    user_data = user_name.split(",")
+    for user in user_data: 
+        usr = {'surname': None,
+               'name': None,
+               'patronymic': None}
+        index = 0
+        for i in usr.keys():
+            usr[i] = user.strip().split(" ")[index]
+            index +=1
+        users.append(usr)
+    
+    print(users)
+        
+    
+    return queryset
+
+
+#get_user_queryset(user_name=" Самойлов Данил Андреевич, Яковлев Антон Сергеевич, Пунька Аркадий Петрович  ")
 get_data()
