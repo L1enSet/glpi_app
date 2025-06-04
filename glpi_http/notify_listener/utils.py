@@ -41,6 +41,7 @@ def get_user_queryset(user_name):
                 continue
     except IndexError as exc:
         queryset_array = []
+        #tst
     
     print(queryset_array)
     
