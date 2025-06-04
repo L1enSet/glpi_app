@@ -16,11 +16,11 @@ def get_data():
 
     data2 = """update_ticket****0443676**** Яковлев Антон Сергеевич  **** Яковлев Антон Сергеевич  **** Проблемы с ПК  **** <div>\n<h1>Данные формы</h1>\n<h2>Информационный блок</h2>\n<div><strong>1) Описание обращения : </strong>\n<p>Тест. Не удалять. телеграм//////dfg</p>\n</div>\n</div>"""
     data3 = """update_ticket****0443914**** Васильева Екатерина Андреевна  ****  -- **** В связи со сменой фамилии на Старкову, прошу внести изменения в раб.базы, в т.ч._ эл.почта_1с_портал и т.п.  **** <p class=\"MsoNormal\">В связи со сменой фамилии на Старкову, прошу внести соответствующие изменения в раб.базы, в т.ч. эл.почта, 1с, портал и т.п.</p>\n<p class=\"MsoNormal\"> </p>\n<p class=\"MsoNormal\"><span style=\"mso-fareast-language: RU;\">С уважением,</span></p>\n<p class=\"MsoNormal\"><span style=\"mso-fareast-language: RU;\">Старкова Екатерина</span></p>\n<p class=\"MsoNormal\"><span style=\"mso-fareast-language: RU;\">Тел. (342) 238-52-06 доб.1737</span></p>"""
-    data4 = """update_ticket****0443676**** Яковлев Антон Сергеевич  **** Самойлов Данил Андреевич, Яковлев Антон Сергеевич  **** Проблемы с ПК  **** <div>\n<h1>Данные формы</h1>\n<h2>Информационный блок</h2>\n<div><strong>1) Описание обращения : </strong>\n<p>Тест. Не удалять. телеграм//////dfg1232asd213</p>\n</div>\n</div>"""
-    
-    response=requests.post(url=url2, headers=headers, data=data4)
+    data4 = """update_ticket****0443676**** Яковлев Антон Сергеевич  **** Яковлев Антон Сергеевич  **** Проблемы с ПК  **** <div>\n<h1>Данные формы</h1>\n<h2>Информационный блок</h2>\n<div><strong>1) Описание обращения : </strong>\n<p>Тест. Не удалять. телеграм//////dfg1232asd213</p>\n</div>\n</div>"""
+    data5 = """update_ticket****0444321**** Шишкин Вячеслав Александрович  ****  -- **** Предоставить пользователю Зеленину Денису удалённый доступ к рабочему месту через сервис guacamole.  **** <p class=\"MsoPlainText\">В рамках модернизации доступа к внутренней сети компании прошу предоставить пользователю Зеленину Денису удалённый доступ к рабочему месту через сервис guacamole.</p>\n<p class=\"MsoPlainText\"> </p>\n<p class=\"MsoPlainText\">После предоставления доступа доступ через VPN запретить.</p>\n<p class=\"MsoPlainText\"> </p>\n<p class=\"MsoPlainText\">--</p>\n<p class=\"MsoPlainText\">С уважением, Шишкин Вячеслав Александрович Системный инженер «Центра Защиты Информации»</p>\n<p class=\"MsoPlainText\"> </p>\n<p class=\"MsoPlainText\">+7 (342) 238-53-45 (1725)</p>\n<p class=\"MsoPlainText\">Тимирязева 24а, БЦ, к703</p>"""
+    response=requests.post(url=url2, headers=headers, data=data5)
     print(response.status_code)
-
+    print(len(data4))
     print(response.text)
 
 def strParse():
