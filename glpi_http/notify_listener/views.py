@@ -22,7 +22,8 @@ def send_notify(request):
             pattern = choise_pattern(data)
             if pattern != None:
                 for user in pattern.to_users():
-                    django_tb.send_message(user, pattern.message())
+                    msg = pattern.message()
+                    django_tb.send_message(user, msg[0], reply_markup=msg[1])
             else:
                 resp['status'] = 400
                 resp['error'] = 'User not found'

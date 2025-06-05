@@ -1,6 +1,9 @@
 from .utils import get_user_queryset
 from bs4 import BeautifulSoup
 from glpi_http.settings import django_tb
+import telebot
+from telebot import types
+
     
 
 class UpdateTicketPattern():
@@ -28,9 +31,13 @@ class UpdateTicketPattern():
             
     
     def message(self):
-            
+        markup = types.InlineKeyboardMarkup()
+        to_glpi_btn = types.InlineKeyboardButton("Посмотреть в GLPI {}".format(self.ticket_id), url='https://helpdesk.ics.perm.ru/front/ticket.form.php?id={}'.format(self.ticket_id))
+        
+        markup.add(to_glpi_btn)
+        
         message = f"Заявка - {self.ticket_id} была обновленна.\nТема - {self.title}\nОписание - {self.parseDescription()}\nИнициатор - {self.initiator}\nНазначено специалистам - {self.assign_user}"
-        return message
+        return (message, markup)
     
     def to_users(self):
         users_list = []
