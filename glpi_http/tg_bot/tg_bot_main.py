@@ -69,10 +69,11 @@ async def get_message(message):
 def main():
     global tb
 
-    while True:
+    asyncio.run(tb.infinity_polling())
+    """while True:
         try:
             #logging.info("BoT starting!")
-            asyncio.run(tb.infinity_polling())
+            
 
         except ConnectionResetError as conn_err:
             #logging.info("Bot stop polling exc - ConnectionResetError")
@@ -81,7 +82,7 @@ def main():
         except Exception as exc:
             #logging.exception(exc)
             #logging.info("Bot stop polling HTTPSConnectionPool")
-            time.sleep(3)
+            time.sleep(3)"""
 
 
 if __name__ == '__main__':
