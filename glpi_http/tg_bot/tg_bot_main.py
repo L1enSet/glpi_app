@@ -3,25 +3,9 @@ import time
 import asyncio
 from telebot.async_telebot import AsyncTeleBot
 from telebot import types
-
-import os
-import environ
-
+from glpi_http.settings import BOT_TOKEN
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = "../"
-
-env = environ.Env(
-    # set casting, default value
-    DEBUG=(bool, False)
-)
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
-
-BOT_TOKEN = env('BOT_TOKEN')
-print(BOT_TOKEN)
-
-
-
 
 #logging.basicConfig(level=logging.INFO, filename="py_log.log",filemode="w")
 #logging.debug("A DEBUG Message")
@@ -35,7 +19,6 @@ print(BOT_TOKEN)
 #logging.basicConfig(level=logging.INFO, filename="bot_log.log", filemode="a", format="%(asctime)s %(levelname)s %(message)s")
 
 
-#tb = telebot.TeleBot(TOKEN)
 tb = AsyncTeleBot(BOT_TOKEN)
 
 
