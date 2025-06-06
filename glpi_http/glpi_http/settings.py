@@ -26,10 +26,12 @@ env = environ.Env(
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 BOT_TOKEN = env('BOT_TOKEN')
+DEBUG_BOT_TOKEN = env('DEBUG_BOT_TOKEN')
 AL_HST = env('ALLOWED_HOSTS')
 
 
 django_tb = telebot.TeleBot(BOT_TOKEN)
+debug_tb = telebot.TeleBot(DEBUG_BOT_TOKEN)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -76,7 +78,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'notify_listener',
     'users',
-    'tg_bot'
 ]
 
 MIDDLEWARE = [
