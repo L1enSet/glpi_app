@@ -35,8 +35,9 @@ def get_user_queryset(user_name):
         
         for user in users:    
             try:
-                queryset = Employees.objects.get(surname=user['surname'], name=user['name'], patronymic=user['patronymic'])
-                queryset_array.append(queryset)
+                user = Employees.objects.get(surname=user['surname'], name=user['name'], patronymic=user['patronymic'])
+                if user.is_active == True:
+                    queryset_array.append(user)
             except Employees.DoesNotExist as exc:
                 continue
     except IndexError as exc:

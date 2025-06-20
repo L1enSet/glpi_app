@@ -2,8 +2,9 @@ import json
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from .models import Employees
-#from rest_framework.viewsets import ModelViewSet
-#from rest_framework.permissions import IsAdminUser
+from .serializers import EmployeesSerializer
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated
 #from rest_framework.decorators import action
 #from rest_framework.response import Response
 
@@ -37,6 +38,13 @@ def send_notify(request):
     except Exception as exc:
         django_tb.send_message('631273289', str(exc))
 
+
+class EmplyeesApiView(ModelViewSet):
+    serializer_class = EmployeesSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Employees.objects.all()
 
     
     

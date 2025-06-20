@@ -1,6 +1,10 @@
 import requests
 import json
 import math
+from requests.auth import HTTPBasicAuth
+
+
+
 def get_data():
     url = "http://172.17.1.26/send_notify/"
     url2 = "http://127.0.0.1:8000/send_notify/"
@@ -107,4 +111,30 @@ def get_user_queryset(user_name):
 
 
 #get_user_queryset(user_name=" Самойлов Данил Андреевич, Яковлев Антон Сергеевич, Пунька Аркадий Петрович  ")
+
+
+def create_profile(data):
+    url = 'http://127.0.0.1:8000/employees/'
+    headers = {
+        'ContentType': 'application/json',
+
+        }
+    auth = HTTPBasicAuth('admin', 'admin')
+    data = {
+        'glpi_name': 'ayakovlevv2',
+        'tg_id': '123123132',
+        'tg_name': 'ayakov2',
+        'surname': 'yakovlev2',
+        'name': 'anton2',
+        'patronymic': 'sergeevich2',
+        'is_active': 'false'
+        }
+
+    response = requests.post(url=url, headers=headers, data=data, auth=auth)
+    print(response.status_code)
+    print(response.text)
+
+
 get_data()
+
+

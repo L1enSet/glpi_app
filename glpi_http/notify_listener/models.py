@@ -2,9 +2,9 @@ from django.db import models
 
 class Employees(models.Model):
     glpi_token = models.CharField(max_length=256, null=True, blank=True)
-    glpi_name = models.CharField(max_length=128)
-    tg_id = models.CharField(max_length=128)
-    tg_name = models.CharField(max_length=256)
+    glpi_name = models.CharField(max_length=128, unique=True)
+    tg_id = models.CharField(max_length=128, unique=True)
+    tg_name = models.CharField(max_length=256, unique=True)
     surname = models.CharField(max_length=128)
     name = models.CharField(max_length=128)
     patronymic = models.CharField(max_length=128)

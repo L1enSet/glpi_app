@@ -16,12 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from notify_listener.views import send_notify
+from notify_listener.views import send_notify, EmplyeesApiView
 from rest_framework.routers import SimpleRouter, DefaultRouter
 
 
+router = SimpleRouter()
+router.register('employees', EmplyeesApiView, basename='employees')
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('send_notify/', send_notify, name='send_notify')
-]
+    path('send_notify/', send_notify, name='send_notify'),
+] + router.urls
 #http://10.120.254.17/send_notify/
