@@ -113,8 +113,8 @@ def get_user_queryset(user_name):
 #get_user_queryset(user_name=" Самойлов Данил Андреевич, Яковлев Антон Сергеевич, Пунька Аркадий Петрович  ")
 
 
-def create_profile(data):
-    url = 'http://127.0.0.1:8000/employees/'
+def create_profile():
+    url = 'http://172.17.1.26/employees/'
     headers = {
         'ContentType': 'application/json',
 
@@ -135,6 +135,6 @@ def create_profile(data):
     print(response.text)
 
 
-get_data()
+create_profile()
 
 
