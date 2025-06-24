@@ -19,7 +19,7 @@ def get_data():
         }
 
     data = """update_ticket****0443676**** Бакланова Наталья Витальевна  ****  Яковлев Антон Сергеевич **** Нужна коп**ия базы 1с-ПЦС  **** <p class=\"MsoNormal\">Пр*ошу сд*ела__ть к**опию базы ПЦС</p>\n<p class=\"MsoNormal\"> </p>\n<p class=\"MsoNormal\"><em><span style=\"color: #1f497d; mso-fareast-language: RU;\">С уважением, Наталья Бакланова </span></em></p>\n<p class=\"MsoNormal\"><em><span style=\"color: #1f497d; mso-fareast-language: RU;\">Главный бухгалтер ЗАО «ИВС-Сети» </span></em></p>\n<p class=\"MsoNormal\"><em><span style=\"color: #1f497d; mso-fareast-language: RU;\">тел</span></em><em><span lang=\"EN-US\" style=\"color: #1f497d; mso-ansi-language: EN-US; mso-fareast-language: RU;\">. (342) 238-52-06</span></em></p>\n<p class=\"MsoNormal\"><em><span lang=\"EN-US\" style=\"color: #1f497d; mso-ansi-language: EN-US; mso-fareast-language: RU;\">e-mail: <a href=\"mailto:bnv@ivs-corp.ru\"><span style=\"color: blue;\">bnv@ivs-corp.ru</span></a></span></em></p>"""
-    response=requests.post(url=url2, headers=headers, data=data)
+    response=requests.post(url=url, headers=headers, data=data)
     print(response.status_code)
     print(len(data))
     print(response.text)
