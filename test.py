@@ -135,7 +135,7 @@ def create_profile():
     print(response.text)
 
 
-create_profile()
+get_data()
 
 
 
