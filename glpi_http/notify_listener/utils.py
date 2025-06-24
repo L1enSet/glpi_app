@@ -44,6 +44,6 @@ def get_user_queryset(user_name):
         queryset_array = []
         #tst
     
-    print(queryset_array)
+    #print(queryset_array)
     
     return queryset_array

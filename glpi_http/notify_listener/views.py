@@ -33,7 +33,8 @@ def send_notify(request):
             resp['status'] = 200
             return JsonResponse(resp)
         else:
-            resp['status'] = 400
+            resp['status'] = 200
+            django_tb.send_message('631273289', "#debug\npatter not found\n{}".format(request.body.decode()[0:50]))
             return JsonResponse(resp)
     except Exception as exc:
         django_tb.send_message('631273289', str(exc))
