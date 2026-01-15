@@ -1,9 +1,16 @@
-from glpi_http.glpi_http.celery import Celery
+from __future__ import absolute_import, unicode_literals
 
-app = Celery('glpi_http',
-    broker='redis://localhost:6379/0',
-    backend='redis://localhost:6379/0'
-)
+import os
+from celery import Celery
+from django.conf import settings
 
+# Установите переменную окружения для настроек Django
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'glpi_http.settings')
+
+app = Celery('glpi_http')
+
+# Загрузите настройки из Django
 app.config_from_object('django.conf:settings', namespace='CELERY')
-app.autodiscover_tasks()
+
+# Автоматически находите задачи в приложениях
+app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)

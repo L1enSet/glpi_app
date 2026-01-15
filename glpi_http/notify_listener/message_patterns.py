@@ -41,13 +41,13 @@ class UpdateTicketPattern():
             __ — подчёркивание;
 
             ~~ — зачёркнутый текст."""
-        markup = types.InlineKeyboardMarkup()
-        to_glpi_btn = types.InlineKeyboardButton("Посмотреть в GLPI {}".format(self.ticket_id), url='https://helpdesk.ics.perm.ru/front/ticket.form.php?id={}'.format(self.ticket_id))
+        #markup = types.InlineKeyboardMarkup()
+        #to_glpi_btn = types.InlineKeyboardButton("Посмотреть в GLPI {}".format(self.ticket_id), url='https://helpdesk.ics.perm.ru/front/ticket.form.php?id={}'.format(self.ticket_id))
         
-        markup.add(to_glpi_btn)
+        #markup.add(to_glpi_btn)
         
         message = f"Обновление данных в заявке\n*Заявка:* {self.ticket_id}\n*Тема:* {self.title}\n\n*Описание:* {self.parseDescription()}\n*Инициатор:* _{self.initiator}_\n\n*Назначено специалистам:* _{self.assign_user}_"
-        return (message, markup)
+        return message
     
     def to_users(self):
         users_list = []

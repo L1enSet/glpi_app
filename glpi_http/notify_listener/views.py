@@ -5,6 +5,7 @@ from .models import Employees
 from .serializers import EmployeesSerializer
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
+from .rabbitmq_utils import send_to_rabbitmq
 #from rest_framework.decorators import action
 #from rest_framework.response import Response
 
@@ -21,10 +22,17 @@ def send_notify(request):
             debug_tb.send_message('631273289', request.body.decode()[0:200])
             data = request.body.decode().split("****")
             pattern = choise_pattern(data)
+            
             if pattern != None:
+                text = pattern.message()
                 for user in pattern.to_users():
-                    msg = pattern.message()
-                    django_tb.send_message(user, msg[0], reply_markup=msg[1], parse_mode='MARKDOWN')
+                    message = {
+                        'user_id': user,
+                        'text': text,
+                    }
+                    send_to_rabbitmq('telegram_queue', message)
+                    #django_tb.send_message(user, msg[0], reply_markup=msg[1], parse_mode='MARKDOWN')
+                    
             else:
                 resp['status'] = 400
                 resp['error'] = 'User not found'

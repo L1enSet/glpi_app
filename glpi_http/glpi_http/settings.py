@@ -11,9 +11,10 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-import os
+import os, sys
 import telebot
 import environ
+from celery import Celery
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -21,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env(
     # set casting, default value
-    DEBUG=(bool, False)
+    #DEBUG=(bool, False)
 )
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
@@ -40,7 +41,7 @@ debug_tb = telebot.TeleBot(DEBUG_BOT_TOKEN)
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [AL_HST, 'localhost']
 #ALLOWED_HOSTS = []
@@ -135,12 +136,26 @@ DATABASES = {
     }
 }
 
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
-CELERY_TIMEZONE = 'UTC'
-CELERY_ACCEPT_CONTENT = ['application/json']
+# broker (rabbitmq)
+CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672//'
+
+CELERY_TASK_DEFAULT_QUEUE = 'default'
+CELERY_TASK_QUEUES = {
+    'default': {
+        'exchange': 'default',
+        'exchange_type': 'direct',
+        'routing_key': 'default',
+    },
+}
+
+# options Celery
+CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
+
+# save_data_results to
+CELERY_RESULT_BACKEND = 'django-db'
 
 
 # Password validation
