@@ -1,10 +1,9 @@
 from .utils import get_user_queryset
 from bs4 import BeautifulSoup
 from glpi_http.settings import django_tb
-import telebot
-from telebot import types
+import logging
 
-    
+logger = logging.getLogger('views')
 
 class UpdateTicketPattern():
     
@@ -27,7 +26,7 @@ class UpdateTicketPattern():
                 result += "\n"
             return result.replace("*", " ").replace("_", " ")
         except Exception as exc:
-            django_tb.send_message('631273289', str(exc))
+            logger.error('send_notify: (parseDescription) ERROR %s', exc)
             
     
     def message(self):

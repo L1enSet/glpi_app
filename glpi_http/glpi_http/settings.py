@@ -15,6 +15,7 @@ import os, sys
 import telebot
 import environ
 from celery import Celery
+from logging.handlers import RotatingFileHandler
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -46,24 +47,53 @@ DEBUG = True
 ALLOWED_HOSTS = [AL_HST, 'localhost']
 #ALLOWED_HOSTS = []
 
-"""LOGGING = {  
-    'version': 1,  
-    'disable_existing_loggers': False,  
-    'handlers': {  
-        'file': {  
-            'level': 'DEBUG',  
-            'class': 'logging.FileHandler',  
-            'filename': os.path.join(BASE_DIR, '/debug.log'),  
-        },  
-    },  
-    'loggers': {  
-        'django': {  
-            'handlers': ['file'],  
-            'level': 'DEBUG',  
-            'propagate': True,  
-        },  
-    },  
-}"""
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'django-file': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',  
+            'filename': BASE_DIR / 'logs' / 'django.log',  
+            'maxBytes': 1024 * 1024 * 5,  # 5 MB MAX
+            'backupCount': 3,
+            'formatter': 'verbose',
+            'encoding': 'utf-8',
+        },
+        
+        'views-file': {
+            'level': 'WARNING',
+            'class': 'logging.handlers.RotatingFileHandler',  
+            'filename': BASE_DIR / 'logs' / 'views.log',  
+            'maxBytes': 1024 * 1024 * 5,  # 5 MB MAX
+            'backupCount': 3,
+            'formatter': 'verbose',
+            'encoding': 'utf-8',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['django-file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'views': {
+            'handlers': ['views-file'],
+            'level': 'WARNING',
+            'propagate': True,
+        },
+    },
+}
 
 
 # Application definition
