@@ -27,10 +27,15 @@ def send_notify(request):
                     for user in pattern.to_users():
                         message = {
                             'user_id': user,
+                            'type': pattern.notify_type,
+                            'ticket_id': pattern.ticket_id,
+                            'ticket_url': 'https://helpdesk.ics.perm.ru/front/ticket.form.php?id={}'.format(pattern.ticket_id),
                             'text': text,
                             'parse_mode': 'MARKDOWN'
                         }
+
                         send_to_rabbitmq('telegram_queue', message)
+
                         logger.info('send_notify: SENDED MESSAGE TO RABBIT MQ, data: user - %s, ticket - %s', user, pattern.ticket_id)
                 else:
                     logger.info('send_notify: USERS IS NOT FOUND %s, ticket - %s', pattern.assign_user, pattern.ticket_id)
